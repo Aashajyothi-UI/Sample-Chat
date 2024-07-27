@@ -4,11 +4,11 @@ const { v4: uuidv4 } = require('uuid');
 const wss = new WebSocket.Server({ port: 8080 });
 
 wss.on('connection', ws => {
-  ws.id = uuidv4(); // Assign a unique ID to each client
+  ws.id = uuidv4(); 
 
   ws.on('message', message => {
     const parsedMessage = JSON.parse(message);
-    parsedMessage.senderId = ws.id; // Add the sender ID to the message
+    parsedMessage.senderId = ws.id; 
 
     wss.clients.forEach(client => {
       if (client.readyState === WebSocket.OPEN) {
@@ -20,4 +20,4 @@ wss.on('connection', ws => {
   ws.send(JSON.stringify({ text: 'Welcome to the chat!', senderId: ws.id }));
 });
 
-console.log('WebSocket server is running on ws://localhost:8080');
+
